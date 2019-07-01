@@ -1,0 +1,54 @@
+{
+  "name": "chrome-permissions-events-polyfill",
+  "version": "0.0.0",
+  "description": "WebExtensions: Polyfill for permissions.onAdded and permissions.onRemoved events for Firefox.",
+  "license": "MIT",
+  "repository": "bfred-it/chrome-permissions-events-polyfill",
+  "author": "Federico Brigante <github@bfred.it> (bfred.it)",
+  "keywords": [
+    "permissions",
+    "events",
+    "content",
+    "scripts",
+    "browser",
+    "extension",
+    "webext",
+    "web-ext"
+  ],
+  "files": [
+    "index.js",
+    "index.d.ts"
+  ],
+  "scripts": {
+    "test": "xo && tsc --noEmit",
+    "prepublishOnly": "tsc",
+    "build": "tsc",
+    "watch": "tsc --watch"
+  },
+  "xo": {
+    "extensions": [
+      "ts"
+    ],
+    "envs": [
+      "browser"
+    ],
+    "globals": [
+      "chrome"
+    ],
+    "overrides": [
+      {
+        "files": "**/*.ts",
+        "extends": "xo-typescript"
+      }
+    ]
+  },
+  "devDependencies": {
+    "@sindresorhus/tsconfig": "^0.4.0",
+    "@types/chrome": "0.0.86",
+    "@typescript-eslint/eslint-plugin": "^1.9.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "eslint-config-xo-typescript": "^0.15.0",
+    "typescript": "^3.6.0-dev.20190701",
+    "xo": "*"
+  }
+}
