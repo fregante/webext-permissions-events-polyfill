@@ -1,6 +1,6 @@
 {
   "name": "chrome-permissions-events-polyfill",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "WebExtensions: Polyfill for permissions.onAdded and permissions.onRemoved events for Firefox.",
   "license": "MIT",
   "repository": "bfred-it/chrome-permissions-events-polyfill",
