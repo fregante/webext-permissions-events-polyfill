@@ -40,6 +40,11 @@ if (chrome.permissions && !chrome.permissions.onAdded) {
 							setTimeout(listener, 0, fullPermissions); // Run all listeners even if one errors
 						}
 					});
+
+					// Enable polyfill to work across contexts
+					chrome.runtime.sendMessage({
+						permissionsEventsPolyfill: permissions
+					});
 				}
 			});
 		};
@@ -56,5 +61,16 @@ if (chrome.permissions && !chrome.permissions.onAdded) {
 				}
 			});
 		});
+
+		// Enable polyfill to work across contexts
+		if (chrome.runtime.onMessage) {
+			chrome.runtime.onMessage.addListener(message => {
+				if (message && message.permissionsEventsPolyfill) {
+					for (const listener of listeners) {
+						setTimeout(listener, 0, message.permissionsEventsPolyfill);
+					}
+				}
+			});
+		}
 	}
 }

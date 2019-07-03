@@ -27,11 +27,7 @@ require('webext-permissions-events-polyfill');
 
 ## Usage
 
-Include the polyfill as a _background_ script and then refer to the original [Permissions Events](https://developer.chrome.com/apps/permissions#event-onAdded) documentation.
-
-**This polyfill will exclusively work if permissions are requested/removed from the same page where the listener is.** That means, if you run `chrome.permissions.request` in the background page, only the same exact page will receive the event.
-
-If you want to request from `options.html` or `popup.html`, [add your request here](https://github.com/fregante/webext-permissions-events-polyfill/issues/1) or send a PR to add support via `runtime.sendMessage`
+Include the polyfill in manifest.json (except in content scripts) and then refer to the original [Permissions Events](https://developer.chrome.com/apps/permissions#event-onAdded) documentation.
 
 ```js
 chrome.permissions.onAdded.addListener(permissions => {
