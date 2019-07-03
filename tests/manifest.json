@@ -1,0 +1,29 @@
+{
+	"name": "chrome-permissions-events-polyfill",
+	"version": "0.0.0",
+	"manifest_version": 2,
+	"permissions": [
+		"https://www.google.com/*"
+	],
+	"optional_permissions": [
+		"http://*/*",
+		"https://*/*"
+	],
+	"options_ui": {
+		"page": "options.html"
+	},
+	"background": {
+		"scripts": [
+			"built/background.js"
+		],
+		"persistent": false
+	},
+	"content_scripts": [{
+		"matches": [
+			"https://www.google.com/*"
+		],
+		"js": [
+			"built/content.js"
+		]
+	}]
+}
