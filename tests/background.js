@@ -13,20 +13,23 @@ function complete(permissions) {
 const onlyGoogle = {
 	origins: [
 		'https://www.google.com/*'
-	]
+	],
+	permissions: []
 };
 
 const onlyYouTube = {
 	origins: [
 		'https://youtube.com/*'
-	]
+	],
+	permissions: []
 };
 
 const jointPermissions = {
 	origins: [
 		'https://www.google.com/*',
 		'https://youtube.com/*'
-	]
+	],
+	permissions: []
 };
 
 test('Config tape', async t => {
@@ -59,9 +62,11 @@ test('onAdded: true', async t => {
 
 test('onAdded: true (already there)', async t => {
 	chrome.permissions.onAdded.addListener(t.fail);
-	const user = browser.permissions.request({
-		origins: ['https://youtube.com/*']
-	});
+	const user = userCall('', () =>
+		browser.permissions.request({
+			origins: ['https://youtube.com/*']
+		})
+	);
 	t.true(await user);
 	t.deepEqual(await browser.permissions.getAll(), complete(jointPermissions));
 });

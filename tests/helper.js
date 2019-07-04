@@ -14,17 +14,13 @@ exports.userCall = (instructions, callback) => {
 			console.log(`%c\nVisit https://www.google.com \nRight click anywhere\n"Click me"\n${instructions}`, 'padding: 1em; font-weight: bold');
 
 			browser.contextMenus.onClicked.addListener(async info => {
-				console.log('clicked')
 				if (info.menuItemId === id) {
-				console.log('will wait', callback.toString())
-
 				resolve(await callback());
-				console.log('resolved')
 					browser.contextMenus.remove(id);
 				}
 			});
 		} else {
-			console.log(`%cType ok, press Enter and then ${instructions}`, 'padding: 1em; font-weight: bold');
+			console.log(`%cType ok\nPress Enter\n${instructions}`, 'padding: 1em; font-weight: bold');
 			Object.defineProperty(window, 'ok', {
 				get() {
 					(async () => {
