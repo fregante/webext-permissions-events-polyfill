@@ -20,7 +20,7 @@
     "index.d.ts"
   ],
   "scripts": {
-    "prepare-manual-tests": "parcel watch tests/*.js --out-dir tests/built --no-hmr",
+    "test-manually": "parcel watch tests/*.js --out-dir tests/built --no-hmr",
     "test": "xo && tsc --noEmit",
     "prepublishOnly": "tsc",
     "build": "tsc",
