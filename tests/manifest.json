@@ -10,21 +10,10 @@
 		"http://*/*",
 		"https://*/*"
 	],
-	"options_ui": {
-		"page": "options.html"
-	},
 	"background": {
 		"scripts": [
 			"built/background.js"
 		],
 		"persistent": false
-	},
-	"content_scripts": [{
-		"matches": [
-			"https://www.google.com/*"
-		],
-		"js": [
-			"built/content.js"
-		]
-	}]
+	}
 }
