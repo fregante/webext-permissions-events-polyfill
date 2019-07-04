@@ -19,12 +19,19 @@ if (chrome.permissions && !chrome.permissions.onAdded) {
 
 		// Listen into requests and fire callbacks
 		chrome.permissions[action] = (permissions, callback) => {
-			act(permissions, successful => {
+			const initial = browser.permissions.contains(permissions);
+			const expected = action === 'request';
+			act(permissions, async successful => {
 				if (callback) {
 					callback(successful);
 				}
 
-				if (successful) {
+				if (!successful) {
+					return;
+				}
+
+				// Only fire events if they changed
+				if (await initial !== expected) {
 					// Firefox won't run asynchronous functions without this
 					chrome.permissions.getAll(() => {
 						for (const listener of listeners) {
