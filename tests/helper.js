@@ -1,19 +1,42 @@
-exports.test = require('tape-promise').default(require('tape'));
-exports.browser = require('webextension-polyfill');
-exports.userCall = (instructions, callback) => {
-	return new Promise(resolve => {
-		console.log(`%cType ok, press Enter and then ${instructions}`, 'padding: 1em; font-weight: bold');
-		Object.defineProperty(window, 'ok', {
-			get() {
-				(async () => {
-					resolve(await callback());
-				})();
+const browser = require('webextension-polyfill');
 
-				delete window.ok;
-				return 'Thanks!';
-			},
-			configurable: true
-		});
+exports.browser = browser;
+exports.test = require('tape-promise').default(require('tape'));
+
+exports.userCall = (instructions, callback) => {
+	return new Promise(async resolve => {
+		if (navigator.userAgent.includes('Firefox/')) {
+			const id = await browser.contextMenus.create({
+				title: '--- Click me ---',
+				contexts: ['all']
+			});
+
+			console.log(`%c\nVisit https://www.google.com \nRight click anywhere\n"Click me"\n${instructions}`, 'padding: 1em; font-weight: bold');
+
+			browser.contextMenus.onClicked.addListener(async info => {
+				console.log('clicked')
+				if (info.menuItemId === id) {
+				console.log('will wait', callback.toString())
+
+				resolve(await callback());
+				console.log('resolved')
+					browser.contextMenus.remove(id);
+				}
+			});
+		} else {
+			console.log(`%cType ok, press Enter and then ${instructions}`, 'padding: 1em; font-weight: bold');
+			Object.defineProperty(window, 'ok', {
+				get() {
+					(async () => {
+						resolve(await callback());
+					})();
+
+					delete window.ok;
+					return 'Thanks!';
+				},
+				configurable: true
+			});
+		}
 	});
 };
 
@@ -24,4 +47,6 @@ Object.defineProperty(window, 'bye', {
 });
 
 exports.test.onFinish(() => console.log('%cSuccess!!', 'text-shadow: 0 0 1em lightgreen; font-weight: bold; font-size: 3em; padding: 2em'));
-exports.test.onFailure(() => console.warn('You might want to uninstall the extension before re-testing. Type bye to uninstall'));
+exports.test.onFailure(() => {
+	throw 'You might want to uninstall the extension before re-testing. Type bye to uninstall';
+});

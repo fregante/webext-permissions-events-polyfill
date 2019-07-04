@@ -5,6 +5,8 @@ const events = [
 	['remove', 'onRemoved']
 ] as const;
 
+const isFirefox = navigator.userAgent.includes('Firefox/');
+
 if (chrome.permissions && !chrome.permissions.onAdded) {
 	for (const [action, event] of events) {
 		const act = chrome.permissions[action];
@@ -34,5 +36,18 @@ if (chrome.permissions && !chrome.permissions.onAdded) {
 				}
 			});
 		};
+
+		if (isFirefox) {
+			browser.permissions[event] = chrome.permissions[event];
+			browser.permissions[action] = (permissions: chrome.permissions.Permissions) => new Promise((resolve, reject) => {
+				chrome.permissions[action](permissions, result => {
+					if (chrome.runtime.lastError) {
+						reject(chrome.runtime.lastError);
+					} else {
+						resolve(result);
+					}
+				});
+			});
+		}
 	}
 }
