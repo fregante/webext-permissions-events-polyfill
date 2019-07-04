@@ -19,6 +19,7 @@
     "index.js"
   ],
   "scripts": {
+    "test-manually": "parcel watch tests/*.js --out-dir tests/built --no-hmr",
     "test": "xo && tsc --noEmit",
     "prepublishOnly": "tsc",
     "build": "tsc",
@@ -46,7 +47,14 @@
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.11.0",
     "eslint-config-xo-typescript": "^0.15.0",
+    "parcel-bundler": "^1.12.3",
+    "tape": "^4.11.0",
+    "tape-promise": "^4.0.0",
     "typescript": "^3.6.0-dev.20190701",
+    "webextension-polyfill": "^0.4.0",
     "xo": "*"
-  }
+  },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ]
 }

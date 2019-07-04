@@ -1,12 +1,8 @@
 node_modules
-.DS_Store
-Desktop.ini
 ._*
 Thumbs.db
-*.tmp
-*.bak
-*.log
-logs
 *.map
 index.js
 index.d.ts
+.cache
+tests/built
