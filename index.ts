@@ -5,8 +5,6 @@ const events = [
 	['remove', 'onRemoved']
 ] as const;
 
-const isFirefox = navigator.userAgent.includes('Firefox/');
-
 if (chrome.permissions && !chrome.permissions.onAdded) {
 	for (const [action, event] of events) {
 		const act = chrome.permissions[action];
@@ -20,7 +18,7 @@ if (chrome.permissions && !chrome.permissions.onAdded) {
 		};
 
 		// Listen into requests and fire callbacks
-		chrome.permissions[action] = async (permissions, callback) => {
+		chrome.permissions[action] = (permissions, callback) => {
 			const initial = browser.permissions.contains(permissions);
 			const expected = action === 'request';
 			act(permissions, async successful => {
@@ -46,17 +44,17 @@ if (chrome.permissions && !chrome.permissions.onAdded) {
 			});
 		};
 
-		if (isFirefox) {
-			browser.permissions[event] = chrome.permissions[event];
-			browser.permissions[action] = (permissions: chrome.permissions.Permissions) => new Promise((resolve, reject) => {
-				chrome.permissions[action](permissions, result => {
-					if (chrome.runtime.lastError) {
-						reject(chrome.runtime.lastError);
-					} else {
-						resolve(result);
-					}
-				});
+		// @ts-ignore `onAdded` is specified as `const`, but isn't
+		browser.permissions[event] = chrome.permissions[event];
+		// TODO: drop `as 'request'` after https://github.com/jsmnbom/definitelytyped-firefox-webext-browser/issues/22
+		browser.permissions[action as 'request'] = async (permissions: chrome.permissions.Permissions) => new Promise<boolean>((resolve, reject) => {
+			chrome.permissions[action](permissions, result => {
+				if (chrome.runtime.lastError) {
+					reject(chrome.runtime.lastError);
+				} else {
+					resolve(result);
+				}
 			});
-		}
+		});
 	}
 }
