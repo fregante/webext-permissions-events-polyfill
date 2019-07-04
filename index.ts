@@ -32,10 +32,12 @@ if (chrome.permissions && !chrome.permissions.onAdded) {
 
 				// Only fire events if they changed
 				if (await initial !== expected) {
+					const fullPermissions = {origins: [], permissions: [], ...permissions};
+
 					// Firefox won't run asynchronous functions without this
 					chrome.permissions.getAll(() => {
 						for (const listener of listeners) {
-							setTimeout(listener, 0, permissions); // Run all listeners even if one errors
+							setTimeout(listener, 0, fullPermissions); // Run all listeners even if one errors
 						}
 					});
 				}
