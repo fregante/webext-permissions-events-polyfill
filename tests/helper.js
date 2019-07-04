@@ -1,3 +1,5 @@
+/* eslint-disable no-throw-literal, no-async-promise-executor  */
+
 const browser = require('webextension-polyfill');
 
 exports.browser = browser;
@@ -15,7 +17,7 @@ exports.userCall = (instructions, callback) => {
 
 			browser.contextMenus.onClicked.addListener(async info => {
 				if (info.menuItemId === id) {
-				resolve(await callback());
+					resolve(await callback());
 					browser.contextMenus.remove(id);
 				}
 			});

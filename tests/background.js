@@ -1,3 +1,5 @@
+/* eslint-disable import/no-unassigned-import  */
+
 const {browser, test, userCall} = require('./helper');
 
 require('../index.ts');
@@ -10,6 +12,7 @@ function complete(permissions) {
 		]
 	};
 }
+
 const onlyGoogle = {
 	origins: [
 		'https://www.google.com/*'
