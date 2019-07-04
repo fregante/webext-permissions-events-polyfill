@@ -1,6 +1,6 @@
 {
   "name": "webext-permissions-events-polyfill",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "WebExtensions: Polyfill for permissions.onAdded and permissions.onRemoved events for Firefox.",
   "license": "MIT",
   "repository": "bfred-it/webext-permissions-events-polyfill",
