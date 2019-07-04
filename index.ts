@@ -43,5 +43,18 @@ if (chrome.permissions && !chrome.permissions.onAdded) {
 				}
 			});
 		};
+
+		// @ts-ignore `onAdded` is specified as `const`, but isn't
+		browser.permissions[event] = chrome.permissions[event];
+		// TODO: drop `as 'request'` after https://github.com/jsmnbom/definitelytyped-firefox-webext-browser/issues/22
+		browser.permissions[action as 'request'] = async (permissions: chrome.permissions.Permissions) => new Promise<boolean>((resolve, reject) => {
+			chrome.permissions[action](permissions, result => {
+				if (chrome.runtime.lastError) {
+					reject(chrome.runtime.lastError);
+				} else {
+					resolve(result);
+				}
+			});
+		});
 	}
 }
