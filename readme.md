@@ -1,9 +1,9 @@
-# chrome-permissions-events-polyfill
+# webext-permissions-events-polyfill
 
 > WebExtensions: Polyfill for [permissions.onAdded](https://developer.chrome.com/apps/permissions#event-onAdded) and [permissions.onRemoved](https://developer.chrome.com/apps/permissions#event-onRemoved) events for Firefox.
 
-[![Travis build status](https://api.travis-ci.com/bfred-it/chrome-permissions-events-polyfill.svg?branch=master)](https://travis-ci.com/bfred-it/chrome-permissions-events-polyfill)
-[![npm version](https://img.shields.io/npm/v/chrome-permissions-events-polyfill.svg)](https://www.npmjs.com/package/chrome-permissions-events-polyfill)
+[![Travis build status](https://api.travis-ci.com/bfred-it/webext-permissions-events-polyfill.svg?branch=master)](https://travis-ci.com/bfred-it/webext-permissions-events-polyfill)
+[![npm version](https://img.shields.io/npm/v/webext-permissions-events-polyfill.svg)](https://www.npmjs.com/package/webext-permissions-events-polyfill)
 
 [Optional permissions](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/optional_permissions) can be added and removed by both Chrome and Firefox, but Firefox doesn't yet support Permission Events: https://bugzilla.mozilla.org/show_bug.cgi?id=1444294
 
@@ -11,18 +11,18 @@ This polyfill will add those two events to Firefox.
 
 ## Install
 
-You can just download the [standalone bundle](https://packd.bfred-it.now.sh/chrome-permissions-events-polyfill) (it might take a minute to download) and include the file in your `manifest.json`, or:
+You can just download the [standalone bundle](https://packd.bfred-it.now.sh/webext-permissions-events-polyfill) (it might take a minute to download) and include the file in your `manifest.json`, or:
 
 ```sh
-npm install chrome-permissions-events-polyfill
+npm install webext-permissions-events-polyfill
 ```
 
 ```js
-import 'chrome-permissions-events-polyfill';
+import 'webext-permissions-events-polyfill';
 ```
 
 ```js
-require('chrome-permissions-events-polyfill');
+require('webext-permissions-events-polyfill');
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ Include the polyfill as a _background_ script and then refer to the original [Pe
 
 **This polyfill will exclusively work if permissions are requested/removed from the same page where the listener is.** That means, if you run `chrome.permissions.request` in the background page, only the same exact page will receive the event.
 
-If you want to request from `options.html` or `popup.html`, [add your request here](https://github.com/bfred-it/chrome-permissions-events-polyfill/issues/1) or send a PR to add support via `runtime.sendMessage`
+If you want to request from `options.html` or `popup.html`, [add your request here](https://github.com/bfred-it/webext-permissions-events-polyfill/issues/1) or send a PR to add support via `runtime.sendMessage`
 
 ```js
 chrome.permissions.onAdded.addListener(permissions => {

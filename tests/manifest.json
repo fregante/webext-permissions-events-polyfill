@@ -1,5 +1,5 @@
 {
-	"name": "chrome-permissions-events-polyfill",
+	"name": "webext-permissions-events-polyfill",
 	"version": "0.0.0",
 	"manifest_version": 2,
 	"permissions": [
