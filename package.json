@@ -2,36 +2,39 @@
   "name": "webext-permissions-events-polyfill",
   "version": "1.0.1",
   "description": "WebExtensions: Polyfill for permissions.onAdded and permissions.onRemoved events for Firefox.",
-  "license": "MIT",
-  "repository": "bfred-it/webext-permissions-events-polyfill",
-  "author": "Federico Brigante <github@bfred.it> (bfred.it)",
   "keywords": [
-    "permissions",
-    "events",
-    "content",
-    "scripts",
     "browser",
+    "content",
+    "events",
     "extension",
-    "webext",
-    "web-ext"
+    "permissions",
+    "scripts",
+    "web-ext",
+    "webext"
   ],
+  "repository": "fregante/webext-permissions-events-polyfill",
+  "license": "MIT",
+  "author": "Federico Brigante <opensource@bfred.it> (bfred.it)",
   "files": [
     "index.js"
   ],
   "scripts": {
-    "test-manually": "parcel watch tests/*.js --out-dir tests/built --no-hmr",
-    "test": "xo && tsc --noEmit",
-    "prepublishOnly": "tsc",
     "build": "tsc",
+    "prepublishOnly": "tsc",
+    "test": "xo && tsc --noEmit",
+    "test-manually": "parcel watch tests/*.js --out-dir tests/built --no-hmr",
     "watch": "tsc --watch"
   },
+  "browserslist": [
+    "last 1 Chrome versions"
+  ],
   "xo": {
-    "extensions": [
-      "ts"
-    ],
     "envs": [
       "browser",
       "webextensions"
+    ],
+    "extensions": [
+      "ts"
     ],
     "overrides": [
       {
@@ -53,8 +56,5 @@
     "typescript": "^3.6.0-dev.20190701",
     "webextension-polyfill": "^0.4.0",
     "xo": "*"
-  },
-  "browserslist": [
-    "last 1 Chrome versions"
-  ]
+  }
 }
