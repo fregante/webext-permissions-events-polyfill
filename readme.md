@@ -1,9 +1,6 @@
-# webext-permissions-events-polyfill
+# webext-permissions-events-polyfill [![](https://img.shields.io/npm/v/webext-permissions-events-polyfill.svg)](https://www.npmjs.com/package/webext-permissions-events-polyfill)
 
 > WebExtensions: Polyfill for [permissions.onAdded](https://developer.chrome.com/apps/permissions#event-onAdded) and [permissions.onRemoved](https://developer.chrome.com/apps/permissions#event-onRemoved) events for Firefox.
-
-[![Travis build status](https://api.travis-ci.com/fregante/webext-permissions-events-polyfill.svg?branch=master)](https://travis-ci.com/fregante/webext-permissions-events-polyfill)
-[![npm version](https://img.shields.io/npm/v/webext-permissions-events-polyfill.svg)](https://www.npmjs.com/package/webext-permissions-events-polyfill)
 
 [Optional permissions](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/optional_permissions) can be added and removed by both Chrome and Firefox, but Firefox doesn't yet support Permission Events: https://bugzilla.mozilla.org/show_bug.cgi?id=1444294
 
@@ -19,10 +16,6 @@ npm install webext-permissions-events-polyfill
 
 ```js
 import 'webext-permissions-events-polyfill';
-```
-
-```js
-require('webext-permissions-events-polyfill');
 ```
 
 ## Usage
@@ -63,7 +56,3 @@ chrome.permissions.onRemoved.addListener(permissions => {
 * [webext-content-script-ping](https://github.com/fregante/webext-content-script-ping) - One-file interface to detect whether your content script have loaded.
 * [web-ext-submit](https://github.com/fregante/web-ext-submit) - Wrapper around Mozilla’s web-ext to submit extensions to AMO.
 * [Awesome-WebExtensions](https://github.com/fregante/Awesome-WebExtensions) - A curated list of awesome resources for WebExtensions development.
-
-## License
-
-MIT © [Federico Brigante](https://bfred.it)
