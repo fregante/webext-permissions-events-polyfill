@@ -1,3 +1,9 @@
+Starting from Firefox 77 (June 2nd, 2020) this polyfill is no longer necessary. :tada:
+
+You can keep this polyfill if you want to support older versions as well; It's automatically disabled where supported.
+
+Keep in mind the [known issue](https://github.com/fregante/webext-permissions-events-polyfill/issues/1), however.
+
 # webext-permissions-events-polyfill [![](https://img.shields.io/npm/v/webext-permissions-events-polyfill.svg)](https://www.npmjs.com/package/webext-permissions-events-polyfill)
 
 > WebExtensions: Polyfill for [permissions.onAdded](https://developer.chrome.com/apps/permissions#event-onAdded) and [permissions.onRemoved](https://developer.chrome.com/apps/permissions#event-onRemoved) events for Firefox.
